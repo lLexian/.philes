@@ -1,0 +1,33 @@
+#!/bin/sh
+
+#
+# ~/.config/aliasrc
+#
+
+## Aliases for common commands
+
+## Replace ls with lsd
+alias \
+	ls='lsd --color=auto' \
+	la='lsd -Al --color=auto' \
+	tree='lsd --tree' \
+	
+## [OLD] Automatically seperates direcories from files and adds colour
+# alias \
+	# ls='ls --color=auto --group-directories-first' \
+	# la='ls -Al --color=auto --group-directories-first' \
+
+## Custom colours
+alias \
+	neofetch='neofetch --colors 219 219 15 219 15 15 --ascii_colors 219' \
+	grep='grep --color=auto' \
+	fgrep='fgrep --color=auto' \
+	egrep='egrep --color=auto'
+
+## Adding useful flags
+alias \
+	cp='cp -i' \
+	df='df -h' \
+	free='free -m'
+
+# picom='picom -b --experimental-backends --backend glx --xrender-sync-fence --config ~/.config/picom.conf'
