@@ -1,0 +1,34 @@
+#
+# /etc/bash/bashrc
+#
+
+## If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+[[ $DISPLAY ]] && shopt -s checkwinsize
+
+# PS1='[\u@\h \W]\$ ' # Default prompt
+export PS1='\033[38;5;196m[\e[5;31mROOT\e[0;31m@\h \e[1;0m\W\033[38;5;196m]\e[5;31m\$\[$(tput sgr0) ' # Custom ROOT prompt w/ flashing
+export PS2='\033[38;5;196m~~>\[$(tput sgr0)\] ' # Slightly cooler PS2 prompt (But for ROOT)
+
+case ${TERM} in
+  xterm*|rxvt*|Eterm|aterm|kterm|gnome*)
+    PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
+     ;;
+   screen*)
+    PROMPT_COMMAND=${PROMPT_COMMAND:+$PROMPT_COMMAND; }'printf "\033_%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
+    ;;
+esac
+
+# for sh in /etc/bash/bashrc.d/*.bashrc ; do
+# 	[[ -r ${sh} ]] && source "${sh}"
+# done
+
+[ -r /usr/share/bash-completion/bash_completion   ] && . /usr/share/bash-completion/bash_completion
+
+## Root alias with only simple bash commands
+alias ls='ls --color=auto --group-directories-first'
+alias la='la -Al --color=auto --group-directories-first'
+alias grep='grep --color=auto'
+alias cp='cp -i'
+alias mv='mv -i'
+alias rm='rm -i'
